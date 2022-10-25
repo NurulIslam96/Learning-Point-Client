@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../contexts/UserContext";
 
 const Header = () => {
+  const {user} = useContext(AuthContext)
   const [openBar, setOpenBar] = React.useState(false);
   const activeLink = ({ isActive }) => {
     return {
@@ -85,6 +87,7 @@ const Header = () => {
               >
                 Sign Up
               </NavLink>
+              <span>{user?.displayName}</span>
             </li>
           </ul>
 

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
 
 const Register = () => {
@@ -11,11 +12,14 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     const confirm = form.confirm.value
+    const photoURL = form.photoURL.value;
+    const displayName = form.displayName.value;
+    console.log(photoURL, displayName)
     if(password !== confirm){
       setError('Your Password did not match')
       return
     }
-    createUser(email, password)
+    createUser(email, password, displayName, photoURL)
     .then(result => {
       const user = result.user;
       console.log(user)
@@ -25,7 +29,7 @@ const Register = () => {
   };
 
   return (
-    <div className="md:my-20 my-7">
+    <div className="md:py-14 py-7 bg-slate-500">
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-4/12 px-4">
@@ -47,9 +51,10 @@ const Register = () => {
                       Full Name
                     </label>
                     <input
-                      type="email"
+                      type="text"
+                      name="displayName"
                       className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                      placeholder="Email"
+                      placeholder="Full Name"
                       style={{ transition: "all .15s ease" }}
                     />
                   </div>
@@ -61,9 +66,10 @@ const Register = () => {
                       Photo Url
                     </label>
                     <input
-                      type="email"
+                      type="text"
+                      name="photoURL"
                       className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                      placeholder="Email"
+                      placeholder="photoURL"
                       style={{ transition: "all .15s ease" }}
                     />
                   </div>
@@ -176,13 +182,7 @@ const Register = () => {
                 </a>
               </div>
               <div className="w-1/2 text-right">
-                <a
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                  className="text-gray-300"
-                >
-                  <small>Please Login</small>
-                </a>
+                <Link to={'/login'} className="text-gray-300"><small>Please Login</small></Link>
               </div>
             </div>
           </div>

@@ -1,8 +1,5 @@
 import React from "react";
-import { Autoplay, Navigation, Pagination } from "swiper";
 import 'swiper/css';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import image1 from '../../assets/img/wd-min-1.jpg';
 
 const Home = () => {
   return (
@@ -29,27 +26,28 @@ const Home = () => {
     //     </div>
     //   </div>
     // </div>
-    <>
-    <img src={image1} alt="" />
-      <Swiper
-        spaceBetween={30}
-        centeredSlides={true}
-        autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
-        }}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper"
-      >
-        <SwiperSlide>HI</SwiperSlide>
-        <SwiperSlide></SwiperSlide>
-        <SwiperSlide></SwiperSlide>
-      </Swiper>
-    </>
+    // <>
+    // <img src={image1} alt="" />
+    //   <Swiper
+    //     spaceBetween={30}
+    //     centeredSlides={true}
+    //     autoplay={{
+    //       delay: 2500,
+    //       disableOnInteraction: false,
+    //     }}
+    //     pagination={{
+    //       clickable: true,
+    //     }}
+    //     navigation={true}
+    //     modules={[Autoplay, Pagination, Navigation]}
+    //     className="mySwiper"
+    //   >
+    //     <SwiperSlide>HI</SwiperSlide>
+    //     <SwiperSlide></SwiperSlide>
+    //     <SwiperSlide></SwiperSlide>
+    //   </Swiper>
+    // </>
+    <div></div>
   );
 };
 

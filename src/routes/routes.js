@@ -1,7 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import Login from "../components/Authentication/Login";
 import Register from "../components/Authentication/Register";
+import Blogs from "../components/Blogs/Blogs";
 import Courses from "../components/Courses/Courses";
+import Faq from "../components/Faq/Faq";
 import Home from "../components/Home/Home";
 import Main from "../layout/Main";
 
@@ -16,15 +18,16 @@ export const routes = createBrowserRouter([
             },
             {
                path: '/courses',
-               element: <Courses></Courses> 
+               element: <Courses></Courses>,
+               loader: () => fetch('https://learning-point-server.vercel.app/courses')
             },
             {
                path: '/faq',
-               element: <Courses></Courses> 
+               element: <Faq></Faq> 
             },
             {
                path: '/blog',
-               element: <Courses></Courses> 
+               element: <Blogs></Blogs>
             },
             {
                path: '/login',
@@ -33,7 +36,7 @@ export const routes = createBrowserRouter([
             {
                path: '/signup',
                element: <Register></Register>
-            },
+            }
         ]
     }
 ])

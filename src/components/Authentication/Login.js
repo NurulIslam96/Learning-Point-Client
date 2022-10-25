@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
 
 const Login = () => {
   const { user, googleSignIn, signIn } = useContext(AuthContext);
-  const [error , setError] = useState('')
+  const [error, setError] = useState("");
 
   const handleGoogle = () => {
     googleSignIn()
@@ -14,25 +15,25 @@ const Login = () => {
   };
 
   const handleLogin = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
     signIn(email, password)
-    .then(result => {
-      const user = result.user
-      console.log(user)
-      form.reset()
-    })
-    .catch(e => setError(e.message))
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        form.reset();
+      })
+      .catch((e) => setError(e.message));
   };
 
   return (
-    <div className="md:my-40 my-7">
+    <div className="md:py-40 py-7 bg-slate-500">
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-4/12 px-4">
-            <div className=" flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
+          <div className="flex flex-col  break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
                   <h6 className="text-gray-600 text-lg font-bold">
@@ -41,7 +42,7 @@ const Login = () => {
                 </div>
                 <div className=" text-center">
                   <button
-                    className="bg-white active:bg-gray-100 text-gray-800 font-normal md:px-12 px-6 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
+                    className="bg-white active:bg-gray-100 text-gray-800 md:px-12 px-6 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
                     type="button"
                     style={{ transition: "all .15s ease" }}
                   >
@@ -53,7 +54,7 @@ const Login = () => {
                     Github
                   </button>
                   <button
-                    className="bg-white active:bg-gray-100 text-gray-800 font-normal md:px-12 px-6 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
+                    className="bg-white active:bg-gray-100 text-gray-800 md:px-12 px-6 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
                     type="button"
                     style={{ transition: "all .15s ease" }}
                     onClick={handleGoogle}
@@ -121,8 +122,12 @@ const Login = () => {
                   </div>
                   <span className="text-red-500 font-bold">{error}</span>
                   <div className="text-center mt-6">
-                    <input type="submit" value={'login'} className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                      style={{ transition: "all .15s ease" }} />
+                    <input
+                      type="submit"
+                      value={"login"}
+                      className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                      style={{ transition: "all .15s ease" }}
+                    />
                   </div>
                 </form>
               </div>
@@ -138,13 +143,9 @@ const Login = () => {
                 </a>
               </div>
               <div className="w-1/2 text-right">
-                <a
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                  className="text-gray-300"
-                >
+                <Link className="text-gray-300" to={"/signup"}>
                   <small>Create new account</small>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

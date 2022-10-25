@@ -87,7 +87,6 @@ const Header = () => {
               >
                 Sign Up
               </NavLink>
-              <span>{user?.displayName}</span>
             </li>
           </ul>
 

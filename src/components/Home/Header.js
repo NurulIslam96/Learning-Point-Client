@@ -5,7 +5,7 @@ const Header = () => {
   const [openBar, setOpenBar] = React.useState(false);
   const activeLink = ({ isActive }) => {
     return {
-      boxShadow: isActive ? "inset 0 -3px 0 0 #1865f2" : ""
+      boxShadow: isActive ? "inset 0 2px #1865f2" : ""
     };
   };
   return (

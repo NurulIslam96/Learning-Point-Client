@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../contexts/UserContext";
 
-const Home = () => {
+const Login = () => {
+  const {user} = useContext(AuthContext)
+  
   return (
     <div className="absolute w-full h-full">
         <div
@@ -139,4 +142,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Login;

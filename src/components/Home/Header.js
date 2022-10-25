@@ -64,34 +64,28 @@ const Header = () => {
                 Blog
               </NavLink>
             </li>
-            <div className="dropdown relative">
+            <li>
               <NavLink
-                className="dropdown-toggle flex items-center hidden-arrow"
-                id="dropdownMenuButton2"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                onClick={openBar}
+                style={activeLink}
+                to="/login"
+                aria-label="login"
+                title="login"
+                className="font-medium hover:text-blue-600 tracking-wide text-blue-900 transition-colors duration-300"
               >
-                <img
-                  src="https://mdbootstrap.com/img/new/avatars/2.jpg"
-                  className="rounded-full"
-                  style={{height : '50px' , width: '50px'}}
-                  alt=""
-                  loading="lazy"
-                />
+                Login
               </NavLink>
-              {
-                openBar && (
-                    <NavLink
-                    className="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100 absolute"
-                    href="#"
-                  >
-                    Action
-                  </NavLink>
-                )
-              }
-            </div>
+            </li>
+            <li>
+              <NavLink
+                style={activeLink}
+                to="/signup"
+                aria-label="signup"
+                title="signup"
+                className="font-medium hover:text-blue-600 tracking-wide text-blue-900 transition-colors duration-300"
+              >
+                Sign Up
+              </NavLink>
+            </li>
           </ul>
 
           <div className="lg:hidden">

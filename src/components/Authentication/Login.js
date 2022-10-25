@@ -2,7 +2,17 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../contexts/UserContext";
 
 const Login = () => {
-  const {user} = useContext(AuthContext)
+  const {user , googleSignIn} = useContext(AuthContext)
+
+  const handleGoogle = () => {
+    googleSignIn()
+    .then(result => {
+      const user = result.user;
+    })
+    .catch(e => console.error(e))
+  }
+
+  console.log(user)
   
   return (
     <div className="absolute w-full h-full">
@@ -44,6 +54,7 @@ const Login = () => {
                       className="bg-white active:bg-gray-100 text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
                       type="button"
                       style={{ transition: "all .15s ease" }}
+                      onClick={handleGoogle}
                     >
                       <img
                         alt="..."
@@ -69,6 +80,7 @@ const Login = () => {
                       </label>
                       <input
                         type="email"
+                        name="email"
                         className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                         placeholder="Email"
                         style={{ transition: "all .15s ease" }}
@@ -84,6 +96,7 @@ const Login = () => {
                       </label>
                       <input
                         type="password"
+                        name="password"
                         className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                         placeholder="Password"
                         style={{ transition: "all .15s ease" }}

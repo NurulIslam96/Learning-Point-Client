@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyD4lCkXhq6lKVlRRF-M_Kiqd6DBter_u54",
-  authDomain: "learning-point-client.firebaseapp.com",
-  projectId: "learning-point-client",
-  storageBucket: "learning-point-client.appspot.com",
-  messagingSenderId: "338885932405",
-  appId: "1:338885932405:web:2d1ed712222236ad8c8f3c",
+  apiKey: "AIzaSyCwp-LAV_0vZQtHhCDb52g86V0NgVHytqY",
+  authDomain: "learning-point-client-26788.firebaseapp.com",
+  projectId: "learning-point-client-26788",
+  storageBucket: "learning-point-client-26788.appspot.com",
+  messagingSenderId: "507318370959",
+  appId: "1:507318370959:web:70727e60b7b7404d8ae6fa"
 };
 
 // Initialize Firebase

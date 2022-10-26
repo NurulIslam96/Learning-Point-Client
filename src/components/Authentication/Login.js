@@ -1,4 +1,4 @@
-import { GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
@@ -6,7 +6,8 @@ import { AuthContext } from "../../contexts/UserContext";
 const Login = () => {
   const [error, setError] = useState('');
   const { loginPopUp } = useContext(AuthContext);
-  const googleProvider = new GoogleAuthProvider()
+  const googleProvider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider()
   const handleGoogleSignIn = () => {
     loginPopUp(googleProvider)
     .then(result => {
@@ -15,6 +16,15 @@ const Login = () => {
     })
     .catch(e => console.error(e))
   };
+
+  const handleGitSignIn = () => {
+    loginPopUp(githubProvider)
+    .then(result => {
+      const user = result.user;
+      console.log(user)
+    })
+    .catch(e => console.log(e))
+  }
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -45,6 +55,7 @@ const Login = () => {
                       alt="..."
                       className="w-5 mr-1"
                       src={require("../../assets/img/github.svg").default}
+                      onClick={handleGitSignIn}
                     />
                     Github
                   </button>

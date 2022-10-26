@@ -12,7 +12,7 @@ const Courses = ({ course }) => {
            {title}
           </p>
           <button className="w-full rounded-md bg-indigo-600  py-2 text-indigo-100 hover:bg-indigo-500 hover:shadow-md duration-75">
-          <Link to={`/courses/${course.id}`}>Get premium access</Link>
+          <Link to={`/courses/${course.id}`}>Course Details</Link>
           </button>
         </div>
       </div>

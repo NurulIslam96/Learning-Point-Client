@@ -14,6 +14,7 @@ const Header = () => {
   };
   const handleSignOut = () => {
     logOut()
+    setProfileBar(false)
   }
   return (
     <div className="shadow-lg shadow-blue-100">
@@ -114,6 +115,7 @@ const Header = () => {
                   user?.photoURL? 
                   <img
                   style={{ height: "35px" }}
+                  className='rounded-full'
                   src={user?.photoURL}
                   alt={user?.email}
                 />

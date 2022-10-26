@@ -5,7 +5,7 @@ const CourseDetails = () => {
   const courseDetails = useLoaderData();
   const { id, img_url, details, title, ques } = courseDetails;
   return (
-    <div className="lg:w-1/3 md:w-1/2 md:absolute lg:right-1/4 max-h-fit">
+    <div className="lg:w-1/3 md:w-1/2 md:absolute lg:right-1/4 ">
       <div className="bg-white lg:p-5 p-2 rounded-md">
         <p className="text-2xl font-semibold text-center pb-5">{title}</p>
         <img src={img_url} className="w-full pb-5" alt="" />

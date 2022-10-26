@@ -3,8 +3,12 @@ import image from "../../assets/img/author.jpg";
 
 const Blogs = () => {
   return (
-    <div className="bg-slate-200">
-      <div className="container mx-auto gap-4 py-5 md:grid grid-cols-3">
+    <div className="bg-slate-300">
+        <div className="text-center md:py-10 py-4">
+        <p className="text-4xl text-slate-600 font-bold">Learning Point Blogs</p>
+        <p className="md:text-lg text-sm font-semibold text-slate-800">All about Learning, Coding and Best Practices</p>
+        </div>
+      <div className="container mx-auto gap-4 py-5 md:grid grid-cols-2">
         <div className="col-span-1 border rounded-md border-gray-400 bg-white m-2 md:m-0 p-4 flex flex-col justify-between">
           <div className="mb-8">
             <div className="text-gray-900 font-bold text-xl mb-2 md:h-12">

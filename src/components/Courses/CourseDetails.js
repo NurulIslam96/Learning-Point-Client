@@ -19,9 +19,7 @@ const CourseDetails = () => {
           <p>{details}</p>
         )}
         <div className="text-center py-5">
-          <button className="bg-slate-500 hover:bg-slate-700 text-white font-semibold px-5 py-2 rounded-sm">
-            <Link to={`/courseSummary/${id}`}>Go to Details</Link>
-          </button>
+        <Link className="bg-slate-500 hover:bg-slate-700 text-white font-semibold px-5 py-2 rounded-sm" to={`/courseSummary/${id}`}>Go to Details</Link>
         </div>
       </div>
     </div>

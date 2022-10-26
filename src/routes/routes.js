@@ -3,6 +3,7 @@ import Login from "../components/Authentication/Login";
 import Register from "../components/Authentication/Register";
 import Blogs from "../components/Blogs/Blogs";
 import Checkout from "../components/Checkout/Checkout";
+import CourseCardSummary from "../components/Courses/CourseCardSummary";
 import CourseDetails from "../components/Courses/CourseDetails";
 import CoursesContainer from "../components/Courses/CoursesContainer";
 import Faq from "../components/Faq/Faq";
@@ -64,6 +65,14 @@ export const routes = createBrowserRouter([
             <Checkout></Checkout>
           </PrivateRoute>
         ),
+        loader: ({ params }) =>
+          fetch(
+            `https://learning-point-server.vercel.app/courses/${params.id}`
+          ),
+      },
+      {
+        path: "/courseSummary/:id",
+        element: <CourseCardSummary></CourseCardSummary>,
         loader: ({ params }) =>
           fetch(
             `https://learning-point-server.vercel.app/courses/${params.id}`

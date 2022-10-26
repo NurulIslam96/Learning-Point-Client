@@ -9,7 +9,7 @@ const CourseLayout = () => {
         <div className="col-span-1 bg-slate-600 md:rounded-l-md text-center py-28">
           <LeftSiderBar></LeftSiderBar>
         </div>
-        <div className="col-span-3 grid md:grid-cols-3 grid-cols-1 gap-6 items-center justify-center bg-slate-200 md:rounded-r-md px-4 py-12">
+        <div className="col-span-3 grid md:grid-cols-3 grid-cols-1 gap-6 items-center justify-center bg-slate-200 md:rounded-r-md px-4 py-8">
           <Outlet></Outlet>
         </div>
       </div>

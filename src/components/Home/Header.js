@@ -1,23 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FaChevronCircleDown, FaUser } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
 
 const Header = () => {
-  const { user, logOut } = useContext(AuthContext);
   const [openBar, setOpenBar] = React.useState(false);
   const [profileBar, setProfileBar] = React.useState(false);
+  const { user, logOut } = useContext(AuthContext);
+  const [enabled, setEnabled] = useState(false);
+
   const activeLink = ({ isActive }) => {
     return {
-      boxShadow: isActive ? "inset 0 2px #1865f2" : "",
+      boxShadow: isActive ? "inset 0 2px #1865f2" : ""
     };
   };
+
+  
   const handleSignOut = () => {
     logOut();
     setProfileBar(false);
   };
+
   return (
-    <div className="shadow-lg shadow-blue-100">
+    <div style={{backgroundColor : enabled ? 'rgb(30 41 59)' : '', color : enabled? 'white' : ''}} className="shadow-md bg-transparent text-blue-900">
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div className="relative flex items-center justify-between">
           <NavLink
@@ -31,7 +36,7 @@ const Header = () => {
               alt="Learning Point"
               width={"40px"}
             />
-            <div className="flex flex-col ml-2 hover:text-blue-600 text-blue-900 transition-colors duration-200">
+            <div className="flex flex-col ml-2  transition-colors duration-200">
               <span className="text-2xl font-bold tracking-wide uppercase">
                 Learning Point
               </span>
@@ -45,7 +50,7 @@ const Header = () => {
                 to="/courses"
                 aria-label="courses"
                 title="courses"
-                className="font-medium tracking-wide h-32 text-blue-900 transition-colors duration-300 hover:text-blue-600"
+                className="font-medium transition-colors duration-300 hover:text-blue-600"
               >
                 Courses
               </NavLink>
@@ -56,7 +61,7 @@ const Header = () => {
                 to="/faq"
                 aria-label="faq"
                 title="frequently asked questions"
-                className="font-medium hover:text-blue-600 tracking-wide text-blue-900 transition-colors duration-300"
+                className="font-medium transition-colors duration-300 hover:text-blue-600"
               >
                 FAQ
               </NavLink>
@@ -67,12 +72,12 @@ const Header = () => {
                 to="/blog"
                 aria-label="blog"
                 title="blog"
-                className="font-medium hover:text-blue-600 tracking-wide text-blue-900 transition-colors duration-300"
+                className="font-medium transition-colors duration-300 hover:text-blue-600"
               >
                 Blog
               </NavLink>
             </li>
-            {user?.uid? (
+            {user?.uid ? (
               <span className="font-semibold text-blue-700">
                 {user?.displayName}
               </span>
@@ -84,7 +89,7 @@ const Header = () => {
                     to="/login"
                     aria-label="login"
                     title="login"
-                    className="font-medium hover:text-blue-600 tracking-wide text-blue-900 transition-colors duration-300"
+                    className="font-medium hover:text-blue-600 transition-colors duration-300"
                   >
                     Login
                   </NavLink>
@@ -95,14 +100,14 @@ const Header = () => {
                     to="/signup"
                     aria-label="signup"
                     title="signup"
-                    className="font-medium hover:text-blue-600 tracking-wide text-blue-900 transition-colors duration-300"
+                    className="font-medium hover:text-blue-600 transition-colors duration-300"
                   >
                     Sign Up
                   </NavLink>
                 </li>
               </>
             )}
-            {user?.uid? (
+            {user?.uid ? (
               <li>
                 <NavLink
                   style={activeLink}
@@ -110,15 +115,15 @@ const Header = () => {
                   className="rounded-full"
                   onClick={() => setProfileBar(true)}
                 >
-                  {user?.photoURL? (
+                  {user?.photoURL ? (
                     <div className="flex items-center gap-2">
                       <img
-                        style={{ height: "35px"} }
+                        style={{ height: "35px" }}
                         className="rounded-full"
                         src={user?.photoURL}
                         alt={""}
                       />
-                      <FaChevronCircleDown className="hover:text-blue-700" ></FaChevronCircleDown>
+                      <FaChevronCircleDown className="hover:text-blue-700"></FaChevronCircleDown>
                     </div>
                   ) : (
                     <FaUser></FaUser>
@@ -128,6 +133,29 @@ const Header = () => {
             ) : (
               <FaUser></FaUser>
             )}
+            <div className="lg:block hidden">
+              <div className="relative flex flex-col items-center justify-center overflow-hidden">
+                <div className="flex">
+                  <label class="inline-flex relative items-center mr-5 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      checked={enabled}
+                      readOnly
+                    />
+                    <div
+                      onClick={() => {
+                        setEnabled(!enabled);
+                      }}
+                      className="w-11 h-6 bg-gray-200 rounded-full peer  peer-focus:ring-green-300  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                    ></div>
+                    <span className="ml-2 font-medium">
+                      {enabled ? 'Light mode' : 'Dark mode'}
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
           </ul>
           {profileBar && (
             <div className="absolute top-11 mx-0 right-0 w-1/6 lg:block hidden">

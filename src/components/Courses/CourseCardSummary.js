@@ -1,5 +1,5 @@
 import React from "react";
-import { FaDownload } from 'react-icons/fa';
+import { FaDownload } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router-dom";
 import Pdf from "react-to-pdf";
 
@@ -13,7 +13,11 @@ const CourseCardSummary = () => {
         <div className="bg-gray-200 text-gray-700 text-2xl flex justify-between font-semibold px-6 py-4">
           {title}
           <Pdf targetRef={ref} filename="code-example.pdf">
-            {({ toPdf }) => <button onClick={toPdf}><FaDownload></FaDownload></button>}
+            {({ toPdf }) => (
+              <button onClick={toPdf}>
+                <FaDownload></FaDownload>
+              </button>
+            )}
           </Pdf>
         </div>
         <div ref={ref}>
@@ -25,9 +29,12 @@ const CourseCardSummary = () => {
             <div className="border rounded-sm p-4 bg-gray-100">{details}</div>
           </div>
           <div className="bg-gray-200 px-6 py-4 text-center">
-            <button className="bg-slate-600 text-white font-semibold px-5 py-2 rounded-sm">
-              <Link to={`/checkout/${id}`}>Get Premium Access</Link>
-            </button>
+            <Link
+              className="bg-slate-600 text-white font-semibold px-5 py-2 rounded-md"
+              to={`/checkout/${id}`}
+            >
+              Get Premium Access
+            </Link>
           </div>
         </div>
       </div>

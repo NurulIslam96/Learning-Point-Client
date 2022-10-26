@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { FaUser } from 'react-icons/fa';
+import { FaChevronCircleDown, FaUser } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
 
 const Header = () => {
-  const { user ,logOut} = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const [openBar, setOpenBar] = React.useState(false);
   const [profileBar, setProfileBar] = React.useState(false);
   const activeLink = ({ isActive }) => {
@@ -13,9 +13,9 @@ const Header = () => {
     };
   };
   const handleSignOut = () => {
-    logOut()
-    setProfileBar(false)
-  }
+    logOut();
+    setProfileBar(false);
+  };
   return (
     <div className="shadow-lg shadow-blue-100">
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -72,8 +72,8 @@ const Header = () => {
                 Blog
               </NavLink>
             </li>
-            {user?.uid ? (
-              <span className="font-semibold text-blue-500">
+            {user?.uid? (
+              <span className="font-semibold text-blue-700">
                 {user?.displayName}
               </span>
             ) : (
@@ -102,32 +102,32 @@ const Header = () => {
                 </li>
               </>
             )}
-            {
-              user?.uid?
+            {user?.uid? (
               <li>
-              <NavLink
-                style={activeLink}
-                title={user?.displayName}
-                className="rounded-full"
-                onClick={() => setProfileBar(true)}
-              >
-                {
-                  user?.photoURL? 
-                  <img
-                  style={{ height: "35px" }}
-                  className='rounded-full'
-                  src={user?.photoURL}
-                  alt={user?.email}
-                />
-                :
-                <FaUser></FaUser>
-                }
-              </NavLink>
-            </li>
-            :
-            <></>
-            }
-            
+                <NavLink
+                  style={activeLink}
+                  title={user?.displayName}
+                  className="rounded-full"
+                  onClick={() => setProfileBar(true)}
+                >
+                  {user?.photoURL? (
+                    <div className="flex items-center gap-2">
+                      <img
+                        style={{ height: "35px"} }
+                        className="rounded-full"
+                        src={user?.photoURL}
+                        alt={""}
+                      />
+                      <FaChevronCircleDown className="hover:text-blue-700" ></FaChevronCircleDown>
+                    </div>
+                  ) : (
+                    <FaUser></FaUser>
+                  )}
+                </NavLink>
+              </li>
+            ) : (
+              <FaUser></FaUser>
+            )}
           </ul>
           {profileBar && (
             <div className="absolute top-11 mx-0 right-0 w-1/6 lg:block hidden">
@@ -267,10 +267,10 @@ const Header = () => {
                       {user?.uid ? (
                         <li>
                           <NavLink
-                            to="/blog"
-                            aria-label="blog"
-                            title="blog"
+                            aria-label="signout"
+                            title="signout"
                             className="font-medium tracking-wide text-blue-900 transition-colors duration-300 hover:text-blue-600"
+                            onClick={handleSignOut}
                           >
                             Sign Out
                           </NavLink>

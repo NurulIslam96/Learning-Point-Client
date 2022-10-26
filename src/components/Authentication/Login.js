@@ -1,11 +1,13 @@
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
+
 
 const Login = () => {
   const [error, setError] = useState('');
-  const { loginPopUp } = useContext(AuthContext);
+  const { loginPopUp , signIn} = useContext(AuthContext);
+  const navigate = useNavigate()
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider()
   const handleGoogleSignIn = () => {
@@ -13,17 +15,21 @@ const Login = () => {
     .then(result => {
       const user = result.user;
       console.log(user)
+      setError('');
+      navigate('/')
     })
-    .catch(e => console.error(e))
+    .catch(e => setError(e.message))
   };
 
-  const handleGitSignIn = () => {
+  const handleGitLoginIn = () => {
     loginPopUp(githubProvider)
     .then(result => {
       const user = result.user;
       console.log(user)
+      setError('');
+      navigate('/')
     })
-    .catch(e => console.log(e))
+    .catch(e => setError(e.message))
   }
 
   const handleLogin = (event) => {
@@ -31,6 +37,15 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
+    signIn(email, password)
+    .then(result => {
+      const user = result.user;
+      console.log(user)
+      form.reset()
+      setError('');
+      navigate('/')
+    })
+    .catch(e => setError(e.message))
   };
 
   return (
@@ -50,7 +65,7 @@ const Login = () => {
                     className="bg-white active:bg-gray-100 text-gray-800 md:px-12 px-6 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
                     type="button"
                     style={{ transition: "all .15s ease" }}
-                    onClick={handleGitSignIn}
+                    onClick={handleGitLoginIn}
                   >
                     <img
                       alt="..."

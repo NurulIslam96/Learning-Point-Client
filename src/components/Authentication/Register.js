@@ -3,29 +3,29 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
 
 const Register = () => {
-  const [error , setError] = useState('')
-  const { user, createUser } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const { createUser } = useContext(AuthContext);
 
   const handleCreateUser = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    const confirm = form.confirm.value
+    const confirm = form.confirm.value;
     const photoURL = form.photoURL.value;
     const displayName = form.displayName.value;
-    if(password !== confirm){
-      setError('Your Password did not match')
-      return
+    if (password !== confirm) {
+      setError("Your Password did not match");
+      return;
     }
     createUser(email, password, displayName, photoURL)
-    .then(result => {
-      const user = result.user;
-      console.log(user)
-      form.reset()
-      setError('')
-    })
-    .catch(e => setError(e.message))
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setError('');
+        form.reset();
+      })
+      .catch((e) => setError(e.message));
   };
 
   return (
@@ -135,54 +135,28 @@ const Register = () => {
                   </div>
                   <span className="text-red-500 font-bold">{error}</span>
                   <div className="text-center mt-6">
-                  <input type="submit" value={'Sign Up'} className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                      style={{ transition: "all .15s ease" }} />
+                    <input
+                      type="submit"
+                      value={"Sign Up"}
+                      className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                      style={{ transition: "all .15s ease" }}
+                    />
                   </div>
                   <hr className="mt-6 border-b-1 border-gray-400" />
-                  <div className="text-gray-500 text-center mb-3 font-bold">
-                    <small>Or sign in with credentials</small>
-                  </div>
                   <div className="text-center">
-                    <button
-                      className="bg-white active:bg-gray-100 text-gray-800 font-normal md:px-12 px-6 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
-                      type="button"
-                      style={{ transition: "all .15s ease" }}
-                    >
-                      <img
-                        alt="..."
-                        className="w-5 mr-1"
-                        src={require("../../assets/img/github.svg").default}
-                      />
-                      Github
-                    </button>
-                    <button
-                      className="bg-white active:bg-gray-100 text-gray-800 font-normal md:px-12 px-6 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
-                      type="button"
-                      style={{ transition: "all .15s ease" }}
-                    >
-                      <img
-                        alt="..."
-                        className="w-5 mr-1"
-                        src={require("../../assets/img/google.svg").default}
-                      />
-                      Google
-                    </button>
+                  <small className="text-slate-700 text-lg">
+                    Already an user?
+                  </small>
+                  </div>
+                  <div className="flex flex-wrap mt-3">
+                      <Link
+                        to={"/login"}
+                        className="bg-white text-dark active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full text-center"
+                      >
+                        <small>Please Login</small>
+                      </Link>
                   </div>
                 </form>
-              </div>
-            </div>
-            <div className="flex flex-wrap mt-6">
-              <div className="w-1/2">
-                <a
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                  className="text-gray-300"
-                >
-                  <small>Already an user?</small>
-                </a>
-              </div>
-              <div className="w-1/2 text-right">
-                <Link to={'/login'} className="text-gray-300"><small>Please Login</small></Link>
               </div>
             </div>
           </div>

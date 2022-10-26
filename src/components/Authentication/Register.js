@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
 
 const Register = () => {
-  const { user, createUser } = useContext(AuthContext);
   const [error , setError] = useState('')
+  const { user, createUser } = useContext(AuthContext);
 
   const handleCreateUser = (event) => {
     event.preventDefault()
@@ -14,7 +14,6 @@ const Register = () => {
     const confirm = form.confirm.value
     const photoURL = form.photoURL.value;
     const displayName = form.displayName.value;
-    console.log(photoURL, displayName)
     if(password !== confirm){
       setError('Your Password did not match')
       return
@@ -24,6 +23,7 @@ const Register = () => {
       const user = result.user;
       console.log(user)
       form.reset()
+      setError('')
     })
     .catch(e => setError(e.message))
   };

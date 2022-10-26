@@ -1,13 +1,21 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
-import LeftSiderBar from "./LeftSiderBar";
+import { Link } from "react-router-dom";
 
-const Courses = () => { 
-    const courses = useLoaderData()
-    console.log(courses)
+const Courses = ({ course }) => {
+  const {thumbnail_url, title } = course;
   return (
     <div>
-      <LeftSiderBar></LeftSiderBar>
+      <div className="max-w-sm overflow-hidden rounded-xl bg-white shadow-md duration-200 hover:scale-105 hover:shadow-xl">
+        <img src={thumbnail_url} alt="" className="h-auto shadow-purple-200 shadow-md w-full" />
+        <div className="p-5">
+          <p className="text-2xl text-center mb-5 text-gray-700">
+           {title}
+          </p>
+          <button className="w-full rounded-md bg-indigo-600  py-2 text-indigo-100 hover:bg-indigo-500 hover:shadow-md duration-75">
+          <Link to={`/courses/${course.id}`}>Get premium access</Link>
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

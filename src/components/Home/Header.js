@@ -1,15 +1,20 @@
 import React, { useContext } from "react";
+import { FaUser } from 'react-icons/fa';
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
 
 const Header = () => {
-  const {user} = useContext(AuthContext)
+  const { user ,logOut} = useContext(AuthContext);
   const [openBar, setOpenBar] = React.useState(false);
+  const [profileBar, setProfileBar] = React.useState(false);
   const activeLink = ({ isActive }) => {
     return {
-      boxShadow: isActive ? "inset 0 2px #1865f2" : ""
+      boxShadow: isActive ? "inset 0 2px #1865f2" : "",
     };
   };
+  const handleSignOut = () => {
+    logOut()
+  }
   return (
     <div className="shadow-lg shadow-blue-100">
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
@@ -32,7 +37,7 @@ const Header = () => {
               <small className="font-bold">Easy Way to Learn</small>
             </div>
           </NavLink>
-          <ul className="flex hidden items-center space-x-8 lg:flex">
+          <ul className="hidden items-center space-x-8 lg:flex">
             <li>
               <NavLink
                 style={activeLink}
@@ -66,30 +71,116 @@ const Header = () => {
                 Blog
               </NavLink>
             </li>
-            <li>
+            {user?.uid ? (
+              <span className="font-semibold text-blue-500">
+                {user?.displayName}
+              </span>
+            ) : (
+              <>
+                <li>
+                  <NavLink
+                    style={activeLink}
+                    to="/login"
+                    aria-label="login"
+                    title="login"
+                    className="font-medium hover:text-blue-600 tracking-wide text-blue-900 transition-colors duration-300"
+                  >
+                    Login
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    style={activeLink}
+                    to="/signup"
+                    aria-label="signup"
+                    title="signup"
+                    className="font-medium hover:text-blue-600 tracking-wide text-blue-900 transition-colors duration-300"
+                  >
+                    Sign Up
+                  </NavLink>
+                </li>
+              </>
+            )}
+            {
+              user?.uid?
+              <li>
               <NavLink
                 style={activeLink}
-                to="/login"
-                aria-label="login"
-                title="login"
-                className="font-medium hover:text-blue-600 tracking-wide text-blue-900 transition-colors duration-300"
+                title={user?.displayName}
+                className="rounded-full"
+                onClick={() => setProfileBar(true)}
               >
-                Login
+                {
+                  user?.photoURL? 
+                  <img
+                  style={{ height: "35px" }}
+                  src={user?.photoURL}
+                  alt={user?.email}
+                />
+                :
+                <FaUser></FaUser>
+                }
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                style={activeLink}
-                to="/signup"
-                aria-label="signup"
-                title="signup"
-                className="font-medium hover:text-blue-600 tracking-wide text-blue-900 transition-colors duration-300"
-              >
-                Sign Up
-              </NavLink>
-            </li>
+            :
+            <></>
+            }
+            
           </ul>
-
+          {profileBar && (
+            <div className="absolute top-11 mx-0 right-0 w-1/6 lg:block hidden">
+              <div className="p-5 bg-white border rounded shadow-sm">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <NavLink to="/profile" className="inline-flex items-center">
+                      <span className="text-md font-bold tracking-wide text-blue-900 uppercase">
+                        {user?.displayName}
+                      </span>
+                    </NavLink>
+                  </div>
+                  <div>
+                    <button
+                      aria-label="Close Menu"
+                      title="Close Menu"
+                      className="p-2 -mt-2 -mr-2 transition duration-300 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                      onClick={() => setProfileBar(false)}
+                    >
+                      <svg className="w-5 text-red-600" viewBox="0 0 24 24">
+                        <path
+                          fill="currentColor"
+                          d="M19.7,4.3c-0.4-0.4-1-0.4-1.4,0L12,10.6L5.7,4.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l6.3,6.3l-6.3,6.3 c-0.4,0.4-0.4,1,0,1.4C4.5,19.9,4.7,20,5,20s0.5-0.1,0.7-0.3l6.3-6.3l6.3,6.3c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3 c0.4-0.4,0.4-1,0-1.4L13.4,12l6.3-6.3C20.1,5.3,20.1,4.7,19.7,4.3z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <nav>
+                  <ul className="space-y-4">
+                    <li>
+                      <NavLink
+                        to="/profile"
+                        aria-label="profile"
+                        title="profile"
+                        className="font-medium tracking-wide text-blue-900 transition-colors duration-300 hover:text-blue-600"
+                      >
+                        Your Profile Info
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        aria-label="signout"
+                        title="signout"
+                        className="font-medium tracking-wide text-blue-900 transition-colors duration-300 hover:text-blue-600"
+                        onClick={handleSignOut}
+                      >
+                        <p>Sign Out</p>
+                      </NavLink>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          )}
           <div className="lg:hidden">
             <button
               aria-label="Open Menu"
@@ -171,6 +262,20 @@ const Header = () => {
                           Blog
                         </NavLink>
                       </li>
+                      {user?.uid ? (
+                        <li>
+                          <NavLink
+                            to="/blog"
+                            aria-label="blog"
+                            title="blog"
+                            className="font-medium tracking-wide text-blue-900 transition-colors duration-300 hover:text-blue-600"
+                          >
+                            Sign Out
+                          </NavLink>
+                        </li>
+                      ) : (
+                        <></>
+                      )}
                     </ul>
                   </nav>
                 </div>

@@ -10,13 +10,17 @@ const LeftSiderBar = () => {
   }, []);
   return (
     <div>
-      <ul>
         {courses.map((course) => (
-          <li key={course.id} course={course}>
+          <button
+            key={course.id}
+            course={course}
+            className="bg-white active:bg-gray-100 text-gray-800 w-2/3 rounded outline-none focus:outline-none mr-2 mb-5 uppercase shadow 
+            hover:shadow-md items-center font-bold text-lg py-3"
+            type="button"
+          >
             <Link to={`/courses/${course.id}`}>{course.name}</Link>
-          </li>
+          </button>
         ))}
-      </ul>
     </div>
   );
 };

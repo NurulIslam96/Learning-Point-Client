@@ -1,51 +1,38 @@
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react';
 import app from '../configs/firebase.config';
 
-export const AuthContext = createContext();
 
-const auth = getAuth(app);
+export const AuthContext = createContext()
+const auth = getAuth(app)
 
 const UserContext = ({children}) => {
+  const [user, setUser] = useState(null)
 
-    const [user, setUser] = useState()
-    const [loading, setLoading] = useState(true)
-    const googleProvider = new GoogleAuthProvider();
+  const loginPopUp = (provider) => {
+    return signInWithPopup(auth, provider)
+  }
 
-    const createUser = (email, password, displayName, photoURL) => {
-        setLoading(true)
-        return createUserWithEmailAndPassword(auth, email, password, displayName, photoURL)
+  const logOut = () => {
+    return signOut(auth)
+  }
+
+  useEffect(()=>{
+    const unsubscribe = onAuthStateChanged(auth, currentUser => {
+      setUser(currentUser)
+    })
+    return () => {
+      unsubscribe();
     }
-    
-    const signIn = (email, password) => {
-        setLoading(true)
-        return signInWithEmailAndPassword(auth, email, password)
-    }
+  }
+  ,[])
 
-    const logOut = () => {
-        setLoading(true)
-        return signOut(auth);
-    }
-
-    const googleSignIn = () => {
-        return signInWithPopup(auth, googleProvider)
-    }
-
-    useEffect(()=>{
-        const unSubscribe = onAuthStateChanged(auth, currentUser => {
-            setUser(currentUser);
-            setLoading(false);
-        })
-        return () => unSubscribe();
-    },[])
-
-    const authInfo = {user, createUser, signIn, logOut, loading, googleSignIn}
-
-    return (
-        <AuthContext.Provider value={authInfo}>
-            {children}
-        </AuthContext.Provider>
-    );
+  const authInfo = {user, loginPopUp, logOut}
+  return (
+    <AuthContext.Provider value={authInfo}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default UserContext;

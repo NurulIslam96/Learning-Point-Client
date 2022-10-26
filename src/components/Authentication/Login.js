@@ -1,17 +1,19 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
 
 const Login = () => {
-  const { user, googleSignIn, signIn } = useContext(AuthContext);
-  const [error, setError] = useState("");
-
-  const handleGoogle = () => {
-    googleSignIn()
-      .then((result) => {
-        const user = result.user;
-      })
-      .catch((e) => setError(e));
+  const [error, setError] = useState('');
+  const { loginPopUp } = useContext(AuthContext);
+  const googleProvider = new GoogleAuthProvider()
+  const handleGoogleSignIn = () => {
+    loginPopUp(googleProvider)
+    .then(result => {
+      const user = result.user;
+      console.log(user)
+    })
+    .catch(e => console.error(e))
   };
 
   const handleLogin = (event) => {
@@ -19,13 +21,6 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    signIn(email, password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-        form.reset();
-      })
-      .catch((e) => setError(e.message));
   };
 
   return (
@@ -57,7 +52,7 @@ const Login = () => {
                     className="bg-white active:bg-gray-100 text-gray-800 md:px-12 px-6 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
                     type="button"
                     style={{ transition: "all .15s ease" }}
-                    onClick={handleGoogle}
+                    onClick={handleGoogleSignIn}
                   >
                     <img
                       alt="..."

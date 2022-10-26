@@ -15,7 +15,7 @@ const CourseDetails = () => {
         </p>
         <hr className="pb-3" />
         {details.length > 300 ? (
-          <p>{details.slice(0, 300) + "..."}<Link className="text-blue-700 font-semibold">Read More</Link></p>
+          <p>{details.slice(0, 300) + "..."}<Link to={`/checkout/${id}`} className="text-blue-700 font-semibold">Read More</Link></p>
         ) : (
           <p>{details}</p>
         )}

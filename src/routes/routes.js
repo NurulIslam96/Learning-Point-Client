@@ -31,12 +31,13 @@ export const routes = createBrowserRouter([
             loader: ({ params }) =>
               fetch(
                 `https://learning-point-server.vercel.app/courses/${params.id}`
-              )
+              ),
           },
           {
             path: "/courses",
             element: <CoursesContainer></CoursesContainer>,
-            loader: () => fetch("https://learning-point-server.vercel.app/courses"),
+            loader: () =>
+              fetch("https://learning-point-server.vercel.app/courses"),
           },
         ],
       },
@@ -56,7 +57,6 @@ export const routes = createBrowserRouter([
         path: "/signup",
         element: <Register></Register>,
       },
-
       {
         path: "/checkout/:id",
         element: (

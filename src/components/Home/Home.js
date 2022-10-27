@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { Swiper, SwiperSlide } from "swiper/react";
+import frontImage from '../../assets/img/home-main.gif';
 import subscribe from '../../assets/img/subscribe.gif';
 
 const Home = () => {
@@ -20,17 +21,17 @@ const Home = () => {
   }
   return (
     <div>
-      <div className="mx-auto container flex md:flex-row flex-col justify-center items-center my-28">
+      <div className="mx-auto container flex md:flex-row flex-col justify-center items-center md:my-28">
         <img
           alt=""
-          src="https://cdn.kastatic.org/images/lohp/hero_student_collage_compressed.png"
+          src={frontImage}
           className="md:w-2/5 w-full"
         />
-        <div className="md:text-5xl text-2xl font-semibold md:ml-8 md:text-left md:w-1/3 text-center">
-          <p className="my-2">
+        <div className="md:text-6xl text-3xl font-bold text-blue-800 md:ml-8 md:text-left md:w-1/3 text-center">
+          <p className="">
             For every student, every classroom. <br /> Real results.
           </p>
-          <hr className="md:w-64 w-1/3 mx-auto h-1 md:mx-0 md:my-3 rounded border-0 bg-gray-300" />
+          <hr className="md:w-80 w-1/3 mx-auto h-1 md:mx-0 md:my-3 rounded border-0 bg-gray-300" />
           <p className="text-xl md:font-semibold font-normal my-6 text-slate-600">
             We're in a mission to provide both free and premium world-class
             education for anyone, anywhere.

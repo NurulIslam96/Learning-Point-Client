@@ -7,11 +7,17 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { Swiper, SwiperSlide } from "swiper/react";
-import serviceImg from '../../assets/img/services-header.png';
+import subscribe from '../../assets/img/subscribe.gif';
 
 const Home = () => {
   const courses = useLoaderData();
   const handleLesson = () => toast("Please Sign Up first");
+  const handleSubscribe = (e) => {
+    e.preventDefault()
+    const form = e.target;
+    form.reset()
+    toast.success('Our Team will Contact you soon.')
+  }
   return (
     <div>
       <div className="mx-auto container flex md:flex-row flex-col justify-center items-center my-28">
@@ -91,12 +97,13 @@ const Home = () => {
           <div className="flex justify-center px-6 my-12">
             <div className="w-full xl:w-3/4 lg:w-11/12 flex">
               <div
-                className="w-full h-auto hidden lg:block lg:w-1/2"
+                className="w-full h-auto hidden lg:block lg:w-2/3 bg-cover"
                 style={{
-                  background: `url(${serviceImg})`,
+                  background: `url(${subscribe})`,
+                  
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: 'center',
-                  backgroundSize: 'cover'
+                  backgroundSize: 'contain'
                 }}
               ></div>
               <div className="w-full lg:w-1/2 md:bg-white bg-slate-100 p-5 rounded-lg lg:rounded-l-none">
@@ -106,7 +113,7 @@ const Home = () => {
                     If you would like us to contact you please provide us your information with your Email and Phone Number
                   </p>
                 </div>
-                <form className="px-8 pt-6 pb-8 mb-4 bg-white rounded">
+                <form onSubmit={handleSubscribe} className="px-8 pt-6 pb-8 mb-4 bg-white rounded">
                   <div className="mb-4">
                     <label
                       className="block mb-2 text-sm font-bold text-gray-700"
@@ -117,6 +124,7 @@ const Home = () => {
                       className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline mb-2"
                       id="email"
                       type="email"
+                      required
                       placeholder="Enter Email Address..."
                     />
                     <label
@@ -128,16 +136,17 @@ const Home = () => {
                       className="w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
                       id="number"
                       type="number"
+                      required
                       placeholder="Enter Mobile Number..."
                     />
                   </div>
                   <div className="mb-6 text-center">
-                    <button
+                    <input
                       className="w-full px-4 py-2 font-bold text-white bg-red-500 rounded-full hover:bg-red-700 focus:outline-none focus:shadow-outline"
-                      type="button"
+                      type="submit"
+                      value={"Subscribe Now"}
                     >
-                      Submit
-                    </button>
+                    </input>
                   </div>
                   <hr className="mb-6 border-t" />
                 </form>

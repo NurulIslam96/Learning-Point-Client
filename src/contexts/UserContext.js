@@ -2,6 +2,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -36,6 +37,10 @@ const UserContext = ({ children }) => {
     return updateProfile(auth.currentUser, profile);
   };
 
+  const passwordReset = (email) => {
+    return sendPasswordResetEmail(auth, email)
+  }
+
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
@@ -59,6 +64,7 @@ const UserContext = ({ children }) => {
     signIn,
     loading,
     updateUserProfile,
+    passwordReset
   };
 
   return (

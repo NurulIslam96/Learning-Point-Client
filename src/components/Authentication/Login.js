@@ -1,40 +1,41 @@
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../contexts/UserContext";
 
-
 const Login = () => {
-  const [error, setError] = useState('');
-  const { loginPopUp , signIn} = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const [showModal, setShowModal] = React.useState(false);
+  const { loginPopUp, signIn, passwordReset } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || '/';
-  
+  const from = location.state?.from?.pathname || "/";
+
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
-  
+
   const handleGoogleSignIn = () => {
     loginPopUp(googleProvider)
-    .then(result => {
-      const user = result.user;
-      console.log(user);
-      setError('');
-      navigate(from, {replace: true});
-    })
-    .catch(e => setError(e.message));
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setError("");
+        navigate(from, { replace: true });
+      })
+      .catch((e) => setError(e.message));
   };
 
   const handleGitLoginIn = () => {
     loginPopUp(githubProvider)
-    .then(result => {
-      const user = result.user;
-      console.log(user)
-      setError('');
-      navigate(from, {replace: true});
-    })
-    .catch(e => setError(e.message))
-  }
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        setError("");
+        navigate(from, { replace: true });
+      })
+      .catch((e) => setError(e.message));
+  };
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -42,14 +43,32 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     signIn(email, password)
-    .then(result => {
-      const user = result.user;
-      console.log(user)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        form.reset();
+        setError("");
+        navigate(from, { replace: true });
+      })
+      .catch((e) => setError(e.message));
+  };
+
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+    const form = e.target
+    const email = form.email.value;
+    passwordReset(email)
+      .then(() => {
+        form.reset()
+        toast.success("Reset Password Link Sent", {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })
+      .catch((e) => {
+        console.error(e);
+        toast.error("User Not Found", { position: toast.POSITION.TOP_CENTER });
+      });
       form.reset()
-      setError('');
-      navigate(from, {replace: true});
-    })
-    .catch(e => setError(e.message))
   };
 
   return (
@@ -57,7 +76,7 @@ const Login = () => {
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-4/12 px-4">
-          <div className="flex flex-col  break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
+            <div className="flex flex-col  break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
                   <h6 className="text-gray-600 text-lg font-bold">
@@ -115,7 +134,6 @@ const Login = () => {
                       style={{ transition: "all .15s ease" }}
                     />
                   </div>
-
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-gray-700 text-xs font-bold mb-2"
@@ -161,12 +179,60 @@ const Login = () => {
               <div className="w-1/2">
                 <a
                   href="#pablo"
-                  onClick={(e) => e.preventDefault()}
+                  onClick={() => setShowModal(true)}
                   className="text-gray-300"
                 >
                   <small>Forgot password?</small>
                 </a>
               </div>
+              {showModal ? (
+                <>
+                  <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                    <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                      <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                        <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                          <h3 className="text-3xl font-semibold">
+                            Want to Reset Password ?
+                          </h3>
+                        </div>
+                        <form onSubmit={handleForgotPassword}>
+                          <div className="relative w-full px-2 mb-3">
+                            <label
+                              className="block uppercase text-gray-700 text-xs py-5 font-bold pl-2 mb-2"
+                              htmlFor="grid-password"
+                            >
+                              Enter your Email Address
+                            </label>
+                            <input
+                              type="email"
+                              name="email"
+                              className="border-2 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
+                              placeholder="Email"
+                              required
+                              style={{ transition: "all .15s ease" }}
+                            />
+                            <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                              <button
+                                className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                type="button"
+                                onClick={() => setShowModal(false)}
+                              >
+                                Close
+                              </button>
+                              <input
+                                value={"Send Reset Link"}
+                                className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                type="submit"
+                              />
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                </>
+              ) : null}
               <div className="w-1/2 text-right">
                 <Link className="text-gray-300" to={"/signup"}>
                   <small>Create new account</small>

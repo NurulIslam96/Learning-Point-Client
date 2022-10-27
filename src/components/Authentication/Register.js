@@ -3,14 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
 
 const Register = () => {
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [accept, setAccept] = useState(false);
-  const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  const handleAcceptTerms = (e) => {
-    setAccept(e.target.checked);
-  };
 
   const handleCreateUser = (event) => {
     event.preventDefault();
@@ -34,6 +30,10 @@ const Register = () => {
         handleUpdateUserProfile(displayName, photoURL);
       })
       .catch((e) => setError(e.message));
+  };
+
+  const handleAcceptTerms = (e) => {
+    setAccept(e.target.checked);
   };
 
   const handleUpdateUserProfile = (displayName, photoURL) => {

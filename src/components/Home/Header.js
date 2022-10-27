@@ -4,9 +4,9 @@ import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../contexts/UserContext";
 
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
   const [openBar, setOpenBar] = React.useState(false);
   const [profileBar, setProfileBar] = React.useState(false);
-  const { user, logOut } = useContext(AuthContext);
   const [enabled, setEnabled] = useState(false);
 
   const activeLink = ({ isActive }) => {
@@ -79,7 +79,7 @@ const Header = () => {
             <div className="lg:block hidden">
               <div className="relative flex flex-col items-center justify-center overflow-hidden">
                 <div className="flex">
-                  <label class="inline-flex relative items-center mr-5 cursor-pointer">
+                  <label className="inline-flex relative items-center mr-5 cursor-pointer">
                     <input
                       type="checkbox"
                       className="sr-only peer"

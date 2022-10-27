@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Checkout = () => {
@@ -85,12 +85,8 @@ const Checkout = () => {
                   </div>
                   <hr className="mt-6 border-b-1 border-gray-400" />
                   <div className="text-center mt-6">
-                    <input
-                      type="submit"
-                      value={"Cancel Order"}
-                      className="bg-red-700 hover:bg-orange-700 cursor-pointer text-white text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                      style={{ transition: "all .15s ease" }}
-                    />
+                    <Link to={'/'} className="bg-red-700 hover:bg-orange-700 cursor-pointer text-white text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                      style={{ transition: "all .15s ease" }}>Cancel Order</Link>
                   </div>
                 </form>
               </div>

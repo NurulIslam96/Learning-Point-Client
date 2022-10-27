@@ -37,12 +37,8 @@ const Home = () => {
             education for anyone, anywhere.
           </p>
           <div className="text-lg flex md:flex-row flex-col md:m-0 mx-auto gap-2 w-2/3">
-            <button className="bg-blue-600 hover:bg-blue-700 px-5 py-2 text-white rounded-md">
-              Get Started
-            </button>
-            <button className="bg-blue-600 hover:bg-blue-700 px-5 py-2 text-white rounded-md md:block hidden">
-              Latest Releases
-            </button>
+            <Link to={'/signup'} className="bg-blue-600 hover:bg-blue-700 px-5 py-2 text-white rounded-md">Get Started</Link>
+            <Link to={'/courses'} className="bg-blue-600 hover:bg-blue-700 px-5 py-2 text-white rounded-md md:block hidden">Latest Releases</Link>
           </div>
         </div>
       </div>

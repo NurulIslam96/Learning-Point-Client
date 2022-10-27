@@ -14,12 +14,25 @@ const CourseDetails = () => {
         </p>
         <hr className="pb-3" />
         {details.length > 300 ? (
-          <p>{details.slice(0, 300) + "..."}<Link to={`/courseSummary/${id}`} className="text-blue-700 font-semibold">Read More</Link></p>
+          <p>
+            {details.slice(0, 300) + "..."}
+            <Link
+              to={`/courseSummary/${id}`}
+              className="text-blue-700 font-semibold"
+            >
+              Read More
+            </Link>
+          </p>
         ) : (
           <p>{details}</p>
         )}
         <div className="text-center py-5">
-        <Link className="bg-slate-500 hover:bg-slate-700 text-white font-semibold px-5 py-2 rounded-sm" to={`/courseSummary/${id}`}>Go to Details</Link>
+          <Link
+            className="bg-blue-600  hover:bg-blue-800 text-white font-semibold px-5 py-2 rounded-md"
+            to={`/courseSummary/${id}`}
+          >
+            Go to Details
+          </Link>
         </div>
       </div>
     </div>

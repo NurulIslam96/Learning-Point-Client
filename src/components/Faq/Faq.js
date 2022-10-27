@@ -7,7 +7,7 @@ const Faq = () => {
   const [box4, setBox4] = useState(false);
 
   return (
-    <div className="bg-gradient-to-r from-slate-700 to-slate-400">
+    <div className="bg-gradient-to-r from-blue-700 to-slate-800">
         <p className="md:text-6xl text-4xl text-center pt-12 font-bold text-slate-100">Frequently asked questions</p>
       <div className="container mx-auto py-5 flex justify-center">
         <div className="md:w-1/2 my-8 p-2 w-full">

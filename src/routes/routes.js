@@ -10,6 +10,7 @@ import CoursesContainer from "../components/Courses/CoursesContainer";
 import ErrorPage from "../components/ErrorPage/ErrorPage";
 import Faq from "../components/Faq/Faq";
 import Home from "../components/Home/Home";
+import ProfileInfo from "../components/ProfileInfo/ProfileInfo";
 import CourseLayout from "../layout/CourseLayout";
 import Main from "../layout/Main";
 import PrivateRoute from "./PrivateRoute";
@@ -85,6 +86,10 @@ export const routes = createBrowserRouter([
       {
         path: "/conditions",
         element:<TermsAndConditions></TermsAndConditions>
+      },
+      {
+        path:'/profile',
+        element:<ProfileInfo></ProfileInfo>
       }
     ],
   },

@@ -3,9 +3,9 @@ import image from "../../assets/img/author.jpg";
 
 const Blogs = () => {
   return (
-    <div className="bg-slate-300">
+    <div className="bg-slate-100">
         <div className="text-center md:py-10 py-4">
-        <p className="text-4xl text-slate-600 font-bold">Learning Point Blogs</p>
+        <p className="text-4xl text-blue-600 font-bold">Learning Point Blogs</p>
         <p className="md:text-lg text-sm font-semibold text-slate-800">All about Learning, Coding and Best Practices</p>
         </div>
       <div className="container mx-auto gap-4 py-5 md:grid grid-cols-2">

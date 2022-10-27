@@ -86,7 +86,7 @@ const Footer = () => {
                   <li>
                     <a
                       className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                      href="https://www.creative-tim.com/bootstrap-themes/free?ref=njs-profile"
+                      href="https://www.google.com/"
                     >
                       Free Products
                     </a>
@@ -101,9 +101,9 @@ const Footer = () => {
                   <li>
                     <a
                       className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                      href="https://github.com/"
+                      href="https://www.google.com/"
                     >
-                      MIT License
+                      LP License
                     </a>
                   </li>
                   <li>

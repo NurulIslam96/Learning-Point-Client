@@ -13,7 +13,7 @@ const Courses = ({ course }) => {
         />
         <div className="p-5">
           <p className="text-2xl text-center mb-5 text-gray-700">{title}</p>
-            <Link className="w-full flex justify-center rounded-md bg-slate-600  py-2 text-indigo-100 hover:bg-slate-500 hover:shadow-md duration-75" to={`/courses/${course.id}`}>Course Details</Link>
+            <Link className="w-full flex justify-center rounded-md bg-blue-600  py-2 text-indigo-100 hover:bg-blue-800 hover:shadow-md duration-75" to={`/courses/${course.id}`}>Course Details</Link>
         </div>
       </div>
     </div>

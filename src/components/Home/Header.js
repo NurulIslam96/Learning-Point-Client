@@ -14,7 +14,6 @@ const Header = () => {
       boxShadow: isActive ? "inset 0 2px #1865f2" : ""
     };
   };
-
   
   const handleSignOut = () => {
     logOut();
@@ -77,8 +76,31 @@ const Header = () => {
                 Blog
               </NavLink>
             </li>
+            <div className="lg:block hidden">
+              <div className="relative flex flex-col items-center justify-center overflow-hidden">
+                <div className="flex">
+                  <label class="inline-flex relative items-center mr-5 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      checked={enabled}
+                      readOnly
+                    />
+                    <div
+                      onClick={() => {
+                        setEnabled(!enabled);
+                      }}
+                      className="w-11 h-6 bg-gray-200 rounded-full peer  peer-focus:ring-green-300  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
+                    ></div>
+                    <span className="ml-2 font-medium">
+                      {enabled ? 'Light mode' : 'Dark mode'}
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
             {user?.uid ? (
-              <span className="font-semibold text-blue-700">
+              <span className="font-semibold">
                 {user?.displayName}
               </span>
             ) : (
@@ -118,7 +140,7 @@ const Header = () => {
                   {user?.photoURL ? (
                     <div className="flex items-center gap-2">
                       <img
-                        style={{ height: "35px" }}
+                        style={{ height: "35px", width: "35px" }}
                         className="rounded-full"
                         src={user?.photoURL}
                         alt={""}
@@ -133,29 +155,6 @@ const Header = () => {
             ) : (
               <FaUser></FaUser>
             )}
-            <div className="lg:block hidden">
-              <div className="relative flex flex-col items-center justify-center overflow-hidden">
-                <div className="flex">
-                  <label class="inline-flex relative items-center mr-5 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      className="sr-only peer"
-                      checked={enabled}
-                      readOnly
-                    />
-                    <div
-                      onClick={() => {
-                        setEnabled(!enabled);
-                      }}
-                      className="w-11 h-6 bg-gray-200 rounded-full peer  peer-focus:ring-green-300  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"
-                    ></div>
-                    <span className="ml-2 font-medium">
-                      {enabled ? 'Light mode' : 'Dark mode'}
-                    </span>
-                  </label>
-                </div>
-              </div>
-            </div>
           </ul>
           {profileBar && (
             <div className="absolute top-11 mx-0 right-0 w-1/6 lg:block hidden">

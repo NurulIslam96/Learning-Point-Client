@@ -1,14 +1,18 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
-  const { id, title, thumbnail_url, price } = useLoaderData();
+  const { title, thumbnail_url, price } = useLoaderData();
+  const handlePurchase = () => {
+    toast.success('Purchase Completed', {position: toast.POSITION.TOP_CENTER})
+  }
   return (
-    <div className="md:py-14 py-7 bg-slate-500">
+    <div className="md:py-14 py-7 bg-slate-300">
       <div className="container mx-auto px-4">
-        <div className="md:flex justify-center">
+        <div className="md:flex justify-between">
           <div className="w-full lg:w-4/12 md:mt-0 mt-10 md:px-4">
-            <div className="flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
+            <div className="flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-4">
                   <h6 className="text-gray-600 text-lg font-bold">
@@ -60,7 +64,6 @@ const Checkout = () => {
                       name="email"
                       className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                       placeholder="Email"
-                      required
                       style={{ transition: "all .15s ease" }}
                     />
                   </div>
@@ -80,29 +83,48 @@ const Checkout = () => {
                       style={{ transition: "all .15s ease" }}
                     />
                   </div>
+                  <hr className="mt-6 border-b-1 border-gray-400" />
                   <div className="text-center mt-6">
                     <input
                       type="submit"
-                      value={"Checkout"}
-                      className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                      value={"Cancel Order"}
+                      className="bg-red-700 hover:bg-orange-700 cursor-pointer text-white text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
                       style={{ transition: "all .15s ease" }}
                     />
                   </div>
-                  <hr className="mt-6 border-b-1 border-gray-400" />
                 </form>
               </div>
             </div>
           </div>
-          <div className="flex flex-col break-words p-2 mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
-            <h2 className="text-center py-2 font-bold text-slate-600">{title}</h2>
-            <img src={thumbnail_url} className='w-full' alt="" />
-            <p className="text-center font-bold text-slate-600 py-5">Price: ${price}</p>
+          <div className="flex flex-col break-words md:px-10 md:py-5 p-2 mb-6 shadow-lg rounded-lg bg-gray-100 border-0">
+            <h2 className="text-center py-2 font-bold text-slate-600">
+              {title}
+            </h2>
+            <img src={thumbnail_url} className="rounded-sm md:w-96 w-full" alt="" />
+            <p className="text-center font-bold text-slate-600 py-5">
+              Price: ${price}
+            </p>
             <div className="flex">
-                <input type="checkbox" checked />
-                <p className="py-5 font-semibold">Item Selected: 1</p>
+              <input type="checkbox" checked />
+              <p className="py-5 font-semibold">Item Selected: 1</p>
             </div>
-                <button className="bg-cyan-800 text-white py-2 rounded-sm font-semibold">Total Price: ${price}</button>
-                <input type="text" placeholder="Apply Coupon" className="rounded-sm py-2 mt-5 px-2" />
+            <button className="bg-slate-300 text-dark py-2 rounded-t-md font-semibold">
+              Total Price: ${price}
+            </button>
+            <input
+              type="text"
+              placeholder="Apply Coupon"
+              className="rounded-b-md outline-none py-2 border-b-2 border-r-2 border-l-2 px-2"
+            />
+            <div className="text-center mt-6">
+              <input
+                type="submit"
+                value={"Confirm Order"}
+                className="cursor-pointer bg-green-600  hover:bg-green-700  text-white text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                style={{ transition: "all .15s ease" }}
+                onClick={handlePurchase}
+              />
+            </div>
           </div>
         </div>
       </div>

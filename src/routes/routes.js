@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Login from "../components/Authentication/Login";
 import Register from "../components/Authentication/Register";
+import TermsAndConditions from "../components/Authentication/TermsAndConditions";
 import Blogs from "../components/Blogs/Blogs";
 import Checkout from "../components/Checkout/Checkout";
 import CourseCardSummary from "../components/Courses/CourseCardSummary";
@@ -81,6 +82,10 @@ export const routes = createBrowserRouter([
             `https://learning-point-server.vercel.app/courses/${params.id}`
           ),
       },
+      {
+        path: "/conditions",
+        element:<TermsAndConditions></TermsAndConditions>
+      }
     ],
   },
 ]);

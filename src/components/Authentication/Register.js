@@ -4,8 +4,14 @@ import { AuthContext } from "../../contexts/UserContext";
 
 const Register = () => {
   const [error, setError] = useState("");
-  const { createUser } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const [accept, setAccept] = useState(false);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleAcceptTerms = (e) => {
+    setAccept(e.target.checked);
+  };
+
   const handleCreateUser = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -18,15 +24,26 @@ const Register = () => {
       setError("Your Password did not match");
       return;
     }
-    createUser(email, password, displayName, photoURL)
+    createUser(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
-        setError('');
+        setError("");
         form.reset();
-        navigate('/')
+        navigate("/");
+        handleUpdateUserProfile(displayName, photoURL);
       })
       .catch((e) => setError(e.message));
+  };
+
+  const handleUpdateUserProfile = (displayName, photoURL) => {
+    const profile = {
+      displayName: displayName,
+      photoURL: photoURL,
+    };
+    updateUserProfile(profile)
+      .then(() => {})
+      .catch((e) => console.error(e));
   };
 
   return (
@@ -128,9 +145,15 @@ const Register = () => {
                         type="checkbox"
                         className="form-checkbox border-0 rounded text-gray-800 ml-1 w-5 h-5"
                         style={{ transition: "all .15s ease" }}
+                        onClick={handleAcceptTerms}
                       />
                       <span className="ml-2 text-sm font-semibold text-gray-700">
-                        Remember me
+                        I Agree with the{" "}
+                        {
+                          <Link to={"/conditions"} className="text-blue-700">
+                            Terms and Conditions.
+                          </Link>
+                        }
                       </span>
                     </label>
                   </div>
@@ -139,23 +162,27 @@ const Register = () => {
                     <input
                       type="submit"
                       value={"Sign Up"}
-                      className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
-                      style={{ transition: "all .15s ease" }}
+                      disabled={!accept}
+                      className="bg-gray-900 cursor-pointer text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                      style={{
+                        transition: "all .15s ease",
+                        backgroundColor: accept ? "" : "#cccccc",
+                      }}
                     />
                   </div>
                   <hr className="mt-6 border-b-1 border-gray-400" />
                   <div className="text-center">
-                  <small className="text-slate-700 text-lg">
-                    Already an user?
-                  </small>
+                    <small className="text-slate-700 text-lg">
+                      Already an user?
+                    </small>
                   </div>
                   <div className="flex flex-wrap mt-3">
-                      <Link
-                        to={"/login"}
-                        className="bg-white text-dark active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full text-center"
-                      >
-                        <small>Please Login</small>
-                      </Link>
+                    <Link
+                      to={"/login"}
+                      className="bg-white text-dark active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full text-center"
+                    >
+                      <small>Please Login</small>
+                    </Link>
                   </div>
                 </form>
               </div>

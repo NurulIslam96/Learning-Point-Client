@@ -11,11 +11,11 @@ https://learning-point-client-26788.web.app/
 
 ## Client Repository Link
 
-https://github.com/programming-hero-web-course1/b610-learning-platform-client-side-NurulIslam96
+https://github.com/NurulIslam96/Learning-Point-Client
 
 ## Server Repository Link
 
-https://github.com/programming-hero-web-course1/b610-lerning-platform-server-side-NurulIslam96
+https://github.com/NurulIslam96/Learning-Point-Server-side-repo
 
 ## Features
 
